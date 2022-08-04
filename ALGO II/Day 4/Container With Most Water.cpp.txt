@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        if(height.size()<=1) return 0;
+        int left = 0;
+        int right = height.size()-1;
+        int max = 0;
+         
+        //two pointer
+        while(left < right){
+            //compute size
+            int curr = min(height[left], height[right]) * (right - left);
+            if(max < curr) max = curr;
+             
+            if(height[left] < height[right]){
+                left++;
+            }else{
+                right--;
+            }
+        }
+        return max;
+    }
+};
