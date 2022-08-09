@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int subarraySum(vector<int> &nums, int target) {
+        map<int, int> prefix_sum;
+        int sum = 0, subarrays = 0;
+        prefix_sum[0]++;
+        for (int index = 0; index < nums.size(); index++) {
+            sum += nums[index];
+            subarrays += prefix_sum[sum - target];
+            prefix_sum[sum]++;
+        }
+
+        return subarrays;
+    }
+};
