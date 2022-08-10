@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> partitionLabels(string s) {
+        vector<int> ans;
+        int n=s.length();
+        int first[26]={-1},last[26]={-1};
+        for(int i=0;i<n;i++){
+            if(first[s[i]-'a']==-1)first[s[i]-'a']=i;
+            last[s[i]-'a']=max(last[s[i]-'a'],i);
+        }
+
+        for(int i=0;i<n;){
+            char let=s[i];
+            int l=last[let-'a'];
+            int j=i;
+            while(j<=l){
+                l=max(last[s[j]-'a'],l);                
+                j++;
+            }
+            ans.push_back(j-i);
+            i=j;
+        }
+        return ans;
+    }
+};
